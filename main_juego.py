@@ -1,9 +1,4 @@
-#Comandos para librerías
-#pip install pyopengl
-#pip install glfw
-
 #Importar librerias
-
 from sre_constants import JUMP
 from turtle import pos
 from OpenGL.GL import *
