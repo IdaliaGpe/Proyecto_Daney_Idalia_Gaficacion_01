@@ -20,7 +20,13 @@ posicion_obstaculo_cuadrado1 = [-0.1, -0.55, 0.0]
 posicion_obstaculo_cuadrado2 = [-0.0, -0.55, 0.0]
 posicion_obstaculo_cuadrado3 = [-0.6, 0.09, 0.0]
 posicion_obstaculo_triangulo3 = [-0.6, -0.0, 0.0]
-lista_obstaculos = [posicion_obstaculo_triangulo1, posicion_obstaculo_triangulo2, posicion_obstaculo_cuadrado1, posicion_obstaculo_cuadrado2, posicion_obstaculo_cuadrado3]
+
+posicion_obstaculo_triangulo4 = [0.5, -0.55, 0.0]
+posicion_obstaculo_triangulo5 = [0.6, -0.55, 0.0]
+posicion_obstaculo_cuadrado4 = [0.4, -0.55, 0.0]
+
+lista_obstaculos = [posicion_obstaculo_triangulo1, posicion_obstaculo_triangulo2, posicion_obstaculo_cuadrado1, posicion_obstaculo_cuadrado2, 
+posicion_obstaculo_cuadrado3, posicion_obstaculo_triangulo4, posicion_obstaculo_triangulo5, posicion_obstaculo_cuadrado4]
 
 circualo_obstaculo_c3 = [-0.6, 0.09, 0.0]
 
@@ -140,6 +146,49 @@ def draw_fondo(posicion_cuadrado, window, posicion_respawn):
     glEnd()
     glPopMatrix()
 
+    #Triangulo1
+    glPushMatrix()
+    glTranslatef(posicion_obstaculo_triangulo4[0], posicion_obstaculo_triangulo4[1], 0.0)
+    glBegin(GL_TRIANGLES)
+
+    #Establecer color
+    glColor3f(1,1,0)
+
+    #Manda vertices a dibujar
+    glVertex3f(-0.05,-0.05,0)
+    glVertex3f(0,0.05,0)
+    glVertex3f(0.05,-0.05,0)
+
+    glEnd()
+    glPopMatrix()
+
+    #Triangulo1
+    glPushMatrix()
+    glTranslatef(posicion_obstaculo_triangulo5[0], posicion_obstaculo_triangulo5[1], 0.0)
+    glBegin(GL_TRIANGLES)
+
+    #Establecer color
+    glColor3f(1,1,0)
+
+    #Manda vertices a dibujar
+    glVertex3f(-0.05,-0.05,0)
+    glVertex3f(0,0.05,0)
+    glVertex3f(0.05,-0.05,0)
+
+    glEnd()
+    glPopMatrix()
+
+    glPushMatrix()
+    glTranslatef(posicion_obstaculo_cuadrado4[0], posicion_obstaculo_cuadrado4[1], 0.0)
+    glBegin(GL_QUADS)
+    glColor3f(1,1,0)
+
+    glVertex3f(-0.05,0.15,0.0)
+    glVertex3f(0.05,0.15,0.0)
+    glVertex3f(0.05,-0.05,0.0)
+    glVertex3f(-0.05,-0.05,0.0)
+    glEnd()
+    glPopMatrix()
 
     for obs in lista_obstaculos:
         if col.colision(posicion_cuadrado, obs, posicion_cuadrado[3], 0.05, posicion_cuadrado[4], 0.05):

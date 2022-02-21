@@ -11,7 +11,8 @@ import fondo as drawfond
 import math
 
 #Variables
-velocidad_x = 0.4
+velocidad_x = 0.6
+
 velocidad_y = 0.7
 JUMP = False
 IS_JUMPING = False
@@ -54,9 +55,9 @@ def actualizar():
  
     #Salto
     #Velocidad de salto
-    poder_salto = 1.5
+    poder_salto = 1.9
     vel_y = velocidad_y * tiempo_delta * poder_salto
-    gravedad = -0.7
+    gravedad = -0.9
     #Que tan alto salta
     cantidad_de_salto = 0.5
 
