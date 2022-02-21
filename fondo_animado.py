@@ -38,6 +38,13 @@ posicion_trianguloA7 = [0.5, 0.488, 0.0]
 posicion_rombo = [-0.6, 0.05, 0.0]
 posicion_rombo2 = [-0.6, 0.05, 0.0]
 
+#TRIANGULOS ADORNOS
+posicion_trianguloA2_1 = [-0.1, 0.81, 0.0]
+posicion_trianguloA2_2 = [0.0, 0.835, 0.0]
+posicion_trianguloA2_3 = [0.1, 0.849, 0.0]
+posicion_trianguloA2_4 = [0.2, 0.785, 0.0]
+posicion_trianguloA2_5 = [0.3, 0.785, 0.0]
+
 ##
 ##
 ##
@@ -371,5 +378,69 @@ def draw_fondo_animado(rotacion_rombo, rotacion_rombo1):
     glVertex3f(0.05,0.05,0.0)
     glVertex3f(0.05,-0.05,0.0)
     glVertex3f(-0.05,-0.05,0.0)
+    glEnd()
+    glPopMatrix()
+    ##
+    ##
+    ##
+    ##
+    ##TRIANGULOS ADORNOS
+    #Triangulos2
+    glPushMatrix()
+    glTranslatef(posicion_trianguloA2_1[0], posicion_trianguloA2_1[1], 0.0)
+    glBegin(GL_TRIANGLES)
+    glColor3f(0.0,1.0,0.733)
+
+    glVertex3f(-0.05,-0.05,0)
+    glVertex3f(0,0.05,0)
+    glVertex3f(0.05,-0.05,0)
+    glEnd()
+    glPopMatrix()
+    ##
+    glPushMatrix()
+    glTranslatef(posicion_trianguloA2_2[0], posicion_trianguloA2_2[1], 0.0)
+    glScalef(1,1.5,0)
+    glBegin(GL_TRIANGLES)
+    glColor3f(0.749,1.0,0.933)
+
+    glVertex3f(-0.05,-0.05,0)
+    glVertex3f(0,0.05,0)
+    glVertex3f(0.05,-0.05,0)
+    glEnd()
+    glPopMatrix()
+    ##
+    glPushMatrix()
+    glTranslatef(posicion_trianguloA2_3[0], posicion_trianguloA2_3[1], 0.0)
+    glScalef(1,1.8,0)
+    glBegin(GL_TRIANGLES)
+    glColor3f(0.929,1.0,0.980)
+
+    glVertex3f(-0.05,-0.05,0)
+    glVertex3f(0,0.05,0)
+    glVertex3f(0.05,-0.05,0)
+    glEnd()
+    glPopMatrix()
+    ##
+    glPushMatrix()
+    glTranslatef(posicion_trianguloA2_4[0], posicion_trianguloA2_4[1], 0.0)
+    glScalef(1,0.5,0)
+    glBegin(GL_TRIANGLES)
+    glColor3f(0.2,0,0.8)
+
+    glVertex3f(-0.05,-0.05,0)
+    glVertex3f(0,0.05,0)
+    glVertex3f(0.05,-0.05,0)
+    glEnd()
+    glPopMatrix()
+    ##
+    glPushMatrix()
+    glTranslatef(posicion_trianguloA2_5[0], posicion_trianguloA2_5[1], 0.0)
+    glScalef(1,0.5,0)
+    glBegin(GL_TRIANGLES)
+    glColor3f(0.0,0,0.95)
+
+    glVertex3f(-0.05,-0.05,0)
+    glVertex3f(0,0.05,0)
+    glVertex3f(0.05,-0.05,0)
     glEnd()
     glPopMatrix()
