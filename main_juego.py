@@ -8,6 +8,7 @@ import glfw
 import colision as col
 import draw_cuadrado as cua
 import fondo as drawfond
+import fondo_animado as fond
 import math
 
 #Variables
@@ -96,6 +97,9 @@ def actualizar():
 #Dibujar Escenarios y Jugador
 def draw():
     global posicion_cuadrado
+
+    fond.draw_fondo_animado()
+    
     posicion_cuadrado = drawfond.draw_fondo(posicion_cuadrado, window, get_posicion_incial())
     cua.draw_cuadrado(posicion_cuadrado)
 
