@@ -11,36 +11,36 @@ from glew_wish import *
 
 import glfw
 import colision as col
-import draw_triangulo as trin
 import draw_cuadrado as cua
 import fondo as drawfond
 import math
 
 #Variables
-velocidad_x = 0.5
-velocidad_y = 0.5
+velocidad_x = 0.6
+velocidad_y = 0.7
 JUMP = False
 IS_JUMPING = False
 IS_FALLING = False
 
-posicion_triangulo = [0.2,0.0,0.0]
-posicion_cuadrado = [-0.9, -0.55, 0.0]
+#Formato = x, y, z, width, height
+posicion_cuadrado = [-0.9, -0.55, 0.0, 0.05, 0.05]
 posicion_y_cuadrado_anterior = 0.0
 window = None
+posicion_reseteo = posicion_cuadrado
 
 tiempo_anterior = 0.0
 
-#Teclas
+#Cerrar con ESC
 def key_callback(window, key, scancode, action, mods):
     #Que la tecla escape cierre ventana al ser presionado
     if key == glfw.KEY_ESCAPE and action == glfw.PRESS:
          glfw.set_window_should_close(window, 1)
 
+#Actualizar Movimientos
 def actualizar():
     global velocidad_x, velocidad_y
     global tiempo_anterior
     global window, JUMP, IS_JUMPING, IS_FALLING 
-    global posicion_triangulo
     global posicion_cuadrado
     global posicion_y_cuadrado_anterior 
 
@@ -49,43 +49,21 @@ def actualizar():
     #y la inmediata anterior de esta funcion
     tiempo_delta = tiempo_actual - tiempo_anterior
 
-    #Leer los estados de las teclas que queremos
-    estado_tecla_arriba = glfw.get_key(window, glfw.KEY_UP)
-    estado_tecla_abajo = glfw.get_key(window, glfw.KEY_DOWN)
-    estado_tecla_derecha = glfw.get_key(window, glfw.KEY_RIGHT)
-    estado_tecla_izquierda = glfw.get_key(window, glfw.KEY_LEFT)
-
     cantidad_movimiento = velocidad_x * tiempo_delta
-    if estado_tecla_arriba == glfw.PRESS:
-        posicion_triangulo[1] = posicion_triangulo[1] + cantidad_movimiento
-    if estado_tecla_derecha == glfw.PRESS:
-        posicion_triangulo[0] = posicion_triangulo[0] + cantidad_movimiento
-    if estado_tecla_abajo == glfw.PRESS:
-        posicion_triangulo[1] = posicion_triangulo[1] - cantidad_movimiento
-    if estado_tecla_izquierda == glfw.PRESS:
-        posicion_triangulo[0] = posicion_triangulo[0] - cantidad_movimiento
 
-
-    #Movimiento derecha / izquierda
-    # estado_tecla_d = glfw.get_key(window, glfw.KEY_D)
-    # estado_tecla_a = glfw.get_key(window, glfw.KEY_A)
-
+    #Cuadrado se mueve solo
     avanzar = True
 
     if avanzar == True:
         posicion_cuadrado[0] = posicion_cuadrado[0] + cantidad_movimiento
-    # if estado_tecla_a == glfw.PRESS:
-    #     posicion_cuadrado[0] = posicion_cuadrado[0] - cantidad_movimiento
-
-    # if estado_tecla_d == glfw.PRESS:
-    #     posicion_cuadrado[0] = posicion_cuadrado[0] + cantidad_movimiento
-    # if estado_tecla_a == glfw.PRESS:
-    #     posicion_cuadrado[0] = posicion_cuadrado[0] - cantidad_movimiento
-
+ 
     #Salto
-    poder_salto = 1.5
+    #Velocidad de salto
+    poder_salto = 1.3
     vel_y = velocidad_y * tiempo_delta * poder_salto
     gravedad = -0.5
+    #Que tan alto salta
+    cantidad_de_salto = 1.0
 
     estado_tecla_space = glfw.get_key(window, glfw.KEY_SPACE)
     if JUMP is False and IS_JUMPING is False and estado_tecla_space == glfw.PRESS:
@@ -98,10 +76,10 @@ def actualizar():
         posicion_cuadrado[1] += vel_y
         IS_JUMPING = True
 
-    # Ver si ya se paso de burger
+    #Ver si ya se paso de burger
     if IS_JUMPING:
-        if posicion_cuadrado[1] - posicion_y_cuadrado_anterior >= 0.2:
-            # print("Bruhc")
+        if posicion_cuadrado[1] - posicion_y_cuadrado_anterior >= cantidad_de_salto:
+            
             JUMP = False
             vel_y = gravedad * tiempo_delta
             posicion_cuadrado[1] += vel_y
@@ -111,18 +89,18 @@ def actualizar():
         vel_y = gravedad * tiempo_delta
         posicion_cuadrado[1] += vel_y
 
-    if posicion_cuadrado[1] < 0:
-        IS_JUMPING = False
-        JUMP = False
-        IS_FALLING = False
+        if posicion_cuadrado[1] <= posicion_y_cuadrado_anterior:
+            IS_JUMPING = False
+            JUMP = False
+            IS_FALLING = False
+            posicion_cuadrado[1] = posicion_y_cuadrado_anterior
 
     tiempo_anterior = tiempo_actual
 
-#Pintar
+#Dibujar Escenarios y Jugador
 def draw():
     drawfond.draw_fondo(posicion_cuadrado, window)
     cua.draw_cuadrado(posicion_cuadrado)
-    trin.draw_triangulo(posicion_triangulo, posicion_cuadrado)
 
 #Main
 def main():
@@ -134,8 +112,8 @@ def main():
     if not glfw.init():
         return
 
-    #declarar ventana
-    window = glfw.create_window(width, height, "Mi ventana", None, None)
+    #Declarar ventana
+    window = glfw.create_window(width, height, "Geometry Dash Pirata", None, None)
 
     #Configuraciones de OpenGL
     glfw.window_hint(glfw.SAMPLES, 4)
@@ -164,6 +142,7 @@ def main():
     version = glGetString(GL_VERSION)
     print(version)
 
+    #Cerrar con ESC
     glfw.set_key_callback(window, key_callback)
     
     #Draw loop
@@ -175,11 +154,10 @@ def main():
         #Borrar el contenido del viewport
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)
 
-
         actualizar()
+
         #Dibujar
         draw()
-
 
         #Polling de inputs
         glfw.poll_events()
@@ -189,6 +167,10 @@ def main():
 
     glfw.destroy_window(window)
     glfw.terminate()
+
+def get_cuadrado():
+    global posicion_cuadrado
+    return posicion_cuadrado 
 
 if __name__ == "__main__":
     main()
