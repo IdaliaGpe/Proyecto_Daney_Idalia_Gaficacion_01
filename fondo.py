@@ -71,7 +71,7 @@ def draw_fondo(posicion_cuadrado, window, posicion_respawn):
     glBegin(GL_TRIANGLES)
 
     #Establecer color
-    glColor3f(1,1,0)
+    glColor3f(0.184,0.361,0.145)
 
     #Manda vertices a dibujar
     glVertex3f(-0.05,-0.05,0)
@@ -83,7 +83,7 @@ def draw_fondo(posicion_cuadrado, window, posicion_respawn):
     glPushMatrix()
     glTranslatef(posicion_obstaculo_cuadrado1[0], posicion_obstaculo_cuadrado1[1], 0.0)
     glBegin(GL_QUADS)
-    glColor3f(1,1,0)
+    glColor3f(0.158,0.368,0.456)
 
     glVertex3f(-0.05,0.05,0.0)
     glVertex3f(0.05,0.05,0.0)
@@ -95,7 +95,7 @@ def draw_fondo(posicion_cuadrado, window, posicion_respawn):
     glPushMatrix()
     glTranslatef(posicion_obstaculo_cuadrado2[0], posicion_obstaculo_cuadrado2[1], 0.0)
     glBegin(GL_QUADS)
-    glColor3f(1,1,0)
+    glColor3f(0.621,0.61,0.48)
 
     glVertex3f(-0.05,0.15,0.0)
     glVertex3f(0.05,0.15,0.0)
@@ -152,7 +152,7 @@ def draw_fondo(posicion_cuadrado, window, posicion_respawn):
     glBegin(GL_TRIANGLES)
 
     #Establecer color
-    glColor3f(1,1,0)
+    glColor3f(0.453,0.451,0.56)
 
     #Manda vertices a dibujar
     glVertex3f(-0.05,-0.05,0)
@@ -168,7 +168,7 @@ def draw_fondo(posicion_cuadrado, window, posicion_respawn):
     glBegin(GL_TRIANGLES)
 
     #Establecer color
-    glColor3f(1,1,0)
+    glColor3f(0.63,0.450,0.14)
 
     #Manda vertices a dibujar
     glVertex3f(-0.05,-0.05,0)
@@ -181,7 +181,7 @@ def draw_fondo(posicion_cuadrado, window, posicion_respawn):
     glPushMatrix()
     glTranslatef(posicion_obstaculo_cuadrado4[0], posicion_obstaculo_cuadrado4[1], 0.0)
     glBegin(GL_QUADS)
-    glColor3f(1,1,0)
+    glColor3f(0.45,0.1,0.186)
 
     glVertex3f(-0.05,0.15,0.0)
     glVertex3f(0.05,0.15,0.0)

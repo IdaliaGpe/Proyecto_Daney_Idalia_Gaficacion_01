@@ -1,4 +1,5 @@
 #Importar librerias
+from pickle import GLOBAL
 from sre_constants import JUMP
 from turtle import pos
 from OpenGL.GL import *
@@ -25,6 +26,10 @@ posicion_y_cuadrado_anterior = 0.0
 window = None
 posicion_respawn = [-0.9, -0.55, 0.0, 0.05, 0.05]
 
+rotacion_rombo = 0.0
+rotacion_rombo1 = 0.0
+velocidad_angular = 135.0
+
 tiempo_anterior = 0.0
 
 #Cerrar con ESC
@@ -40,6 +45,8 @@ def actualizar():
     global window, JUMP, IS_JUMPING, IS_FALLING 
     global posicion_cuadrado
     global posicion_y_cuadrado_anterior 
+    global velocidad_angular, rotacion_rombo, rotacion_rombo1
+
 
     tiempo_actual = glfw.get_time()
     #Cuanto tiempo paso entre la ejecucion actual
@@ -47,6 +54,17 @@ def actualizar():
     tiempo_delta = tiempo_actual - tiempo_anterior
 
     cantidad_movimiento = velocidad_x * tiempo_delta
+
+    cantidad_rotacion = velocidad_angular * tiempo_delta
+    rotacion_rombo = rotacion_rombo + cantidad_rotacion
+
+    rotacion_rombo1 = rotacion_rombo1 + cantidad_rotacion
+
+    if rotacion_rombo  > 360.0:
+        rotacion_rombo = rotacion_rombo - 360.0
+    
+    if rotacion_rombo1  > 360.0:
+        rotacion_rombo1 = rotacion_rombo - 360.0
 
     #Cuadrado se mueve solo
     avanzar = True
@@ -98,7 +116,7 @@ def actualizar():
 def draw():
     global posicion_cuadrado
 
-    fond.draw_fondo_animado()
+    fond.draw_fondo_animado(rotacion_rombo, rotacion_rombo1)
     
     posicion_cuadrado = drawfond.draw_fondo(posicion_cuadrado, window, get_posicion_incial())
     cua.draw_cuadrado(posicion_cuadrado)
