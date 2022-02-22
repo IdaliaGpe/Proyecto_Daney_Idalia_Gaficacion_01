@@ -50,7 +50,7 @@ posicion_trianguloA2_5 = [0.3, 0.785, 0.0]
 ##
 ##
 
-def draw_fondo_animado(rotacion_rombo, rotacion_rombo1):
+def draw_fondo_animado(rotacion_rombo, rotacion_rombo1, posicion_cuadrado45, posicion_cuadrado44):
 
     glPushMatrix()
     glTranslatef(d_posicion_c1[0], d_posicion_c1[1], 0.0)
@@ -347,6 +347,45 @@ def draw_fondo_animado(rotacion_rombo, rotacion_rombo1):
     glVertex3f(0,0.05,0)
     glVertex3f(0.05,-0.05,0)
     glEnd()
+    glPopMatrix()
+
+    glPushMatrix()
+    glTranslatef(posicion_cuadrado45[0], posicion_cuadrado45[1], 0.0)
+    glScalef(0.5,0.5,0)
+    glBegin(GL_QUADS)
+    glColor3f(0.464, 0.393, 0.211)
+    glVertex3f(-0.05,0.05,0.0)
+    glVertex3f(0.05,0.05,0.0)
+    glVertex3f(0.05,-0.05,0.0)
+    glVertex3f(-0.05,-0.05,0.0)
+    glEnd()
+
+    glPopMatrix()
+
+    glPushMatrix()
+    glTranslatef(posicion_cuadrado44[0], posicion_cuadrado44[1], 0.0)
+    glScalef(0.5,0.5,0)
+    glBegin(GL_QUADS)
+    glColor3f(0.464, 0.393, 0.211)
+    glVertex3f(-0.05,0.05,0.0)
+    glVertex3f(0.05,0.05,0.0)
+    glVertex3f(0.05,-0.05,0.0)
+    glVertex3f(-0.05,-0.05,0.0)
+    glEnd()
+
+    glPopMatrix()
+
+    glPushMatrix()
+    glTranslatef(posicion_cuadrado44[0], -0.5, 0.0)
+    glScalef(0.5,0.5,0)
+    glBegin(GL_QUADS)
+    glColor3f(0.464, 0.393, 0.211)
+    glVertex3f(-0.05,0.05,0.0)
+    glVertex3f(0.05,0.05,0.0)
+    glVertex3f(0.05,-0.05,0.0)
+    glVertex3f(-0.05,-0.05,0.0)
+    glEnd()
+
     glPopMatrix()
 
     ##

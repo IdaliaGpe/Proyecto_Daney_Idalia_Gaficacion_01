@@ -4,6 +4,7 @@ from sre_constants import JUMP
 from turtle import pos
 from OpenGL.GL import *
 from glew_wish import *
+from cmath import cos, pi, sin
 
 import glfw
 import colision as col
@@ -29,7 +30,7 @@ posicion_respawn = [-0.9, -0.55, 0.0, 0.05, 0.05]
 rotacion_rombo = 0.0
 rotacion_rombo1 = 0.0
 velocidad_angular = 135.0
-
+velocidad_angular1 = -135.0
 tiempo_anterior = 0.0
 
 #Cerrar con ESC
@@ -37,6 +38,64 @@ def key_callback(window, key, scancode, action, mods):
     #Que la tecla escape cierre ventana al ser presionado
     if key == glfw.KEY_ESCAPE and action == glfw.PRESS:
          glfw.set_window_should_close(window, 1)
+
+#Cuadrado
+posicion_cuadrado45 = [0.0, 0.0, 0.0]
+posicion_cuadrado44 = [0.0, 0.6, 0.0]
+#0 - izquierda,  1 - derecha
+direccion_cuadrado = 1
+velocidad_cuadrado = 0.20
+
+angulo_triangulo = 0.0
+fase = 90.0
+
+def actualizar_cuadrado(tiempo_delta):
+    global direccion_cuadrado
+    global velocidad_cuadrado
+    global posicion_cuadrado45, posicion_cuadrado44
+    cantidad_movimiento = velocidad_cuadrado * tiempo_delta
+    if direccion_cuadrado == 0:
+        posicion_cuadrado45[0] = posicion_cuadrado45[0] - cantidad_movimiento
+        posicion_cuadrado45[0] = posicion_cuadrado45[0] + (
+            math.cos((angulo_triangulo + fase) * pi / 180.0) * cantidad_movimiento
+        )
+        posicion_cuadrado45[1] = posicion_cuadrado45[1] + (
+            math.sin((angulo_triangulo + fase) * pi / 180.0) * cantidad_movimiento
+        )
+        posicion_cuadrado45[0] = posicion_cuadrado45[0] + (
+            math.cos((angulo_triangulo + fase) * pi / 180.0) * cantidad_movimiento
+        )
+        posicion_cuadrado45[1] = posicion_cuadrado45[1] + (
+            math.sin((angulo_triangulo + fase) * pi / 180.0) * cantidad_movimiento
+        )
+
+    elif direccion_cuadrado == 1:
+        posicion_cuadrado45[0] = posicion_cuadrado45[0] + cantidad_movimiento
+       
+    if posicion_cuadrado45[0] <= -0.8 and direccion_cuadrado == 0:
+        direccion_cuadrado = 1
+      
+    if posicion_cuadrado45[0] >= 1 and direccion_cuadrado == 1:
+        direccion_cuadrado = 0
+        
+        #posicion_cuadrado[0] = -1
+        #posicion_cuadrado[1] = posicion_cuadrado[1] - 0.1
+
+    if direccion_cuadrado == 0:
+        posicion_cuadrado44[0] = posicion_cuadrado44[0] - cantidad_movimiento
+
+    elif direccion_cuadrado == 1:
+        posicion_cuadrado44[0] = posicion_cuadrado44[0] + cantidad_movimiento
+       
+    if posicion_cuadrado44[0] <= -0.8 and direccion_cuadrado == 0:
+        direccion_cuadrado = 1
+      
+    if posicion_cuadrado44[0] >= 1 and direccion_cuadrado == 1:
+        direccion_cuadrado = 0
+        
+        #posicion_cuadrado[0] = -1
+        #posicion_cuadrado[1] = posicion_cuadrado[1] - 0.1
+    
 
 #Actualizar Movimientos
 def actualizar():
@@ -56,9 +115,10 @@ def actualizar():
     cantidad_movimiento = velocidad_x * tiempo_delta
 
     cantidad_rotacion = velocidad_angular * tiempo_delta
+    cantidad_rotacion1 = velocidad_angular1 * tiempo_delta
     rotacion_rombo = rotacion_rombo + cantidad_rotacion
 
-    rotacion_rombo1 = rotacion_rombo1 + cantidad_rotacion
+    rotacion_rombo1 = rotacion_rombo1 + cantidad_rotacion1
 
     if rotacion_rombo  > 360.0:
         rotacion_rombo = rotacion_rombo - 360.0
@@ -110,13 +170,14 @@ def actualizar():
             IS_FALLING = False
             posicion_cuadrado[1] = posicion_y_cuadrado_anterior
 
+    actualizar_cuadrado(tiempo_delta)
     tiempo_anterior = tiempo_actual
 
 #Dibujar Escenarios y Jugador
 def draw():
     global posicion_cuadrado
 
-    fond.draw_fondo_animado(rotacion_rombo, rotacion_rombo1)
+    fond.draw_fondo_animado(rotacion_rombo, rotacion_rombo1, posicion_cuadrado45, posicion_cuadrado44)
     
     posicion_cuadrado = drawfond.draw_fondo(posicion_cuadrado, window, get_posicion_incial())
     cua.draw_cuadrado(posicion_cuadrado)
