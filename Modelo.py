@@ -74,6 +74,70 @@ class Modelo:
     @tamaño_6.setter
     def tamaño_6(self, tamaño_6):
         self._tamaño_6 = tamaño_6
+    
+    @property
+    def tamaño_7(self):
+        return self._tamaño_7
+    @tamaño_7.setter
+    def tamaño_7(self, tamaño_7):
+        self._tamaño_7 = tamaño_7
+
+    @property
+    def tamaño_8(self):
+        return self._tamaño_8
+    @tamaño_8.setter
+    def tamaño_8(self, tamaño_8):
+        self._tamaño_8 = tamaño_8
+
+    @property
+    def tamaño_9(self):
+        return self._tamaño_9
+    @tamaño_9.setter
+    def tamaño_9(self, tamaño_9):
+        self._tamaño_9 = tamaño_9
+
+    @property
+    def tamaño_10(self):
+        return self._tamaño_10
+    @tamaño_10.setter
+    def tamaño_10(self, tamaño_10):
+        self._tamaño_10 = tamaño_10
+
+    @property
+    def tamaño_11(self):
+        return self._tamaño_11
+    @tamaño_11.setter
+    def tamaño_11(self, tamaño_11):
+        self._tamaño_11 = tamaño_11
+
+    @property
+    def tamaño_12(self):
+        return self._tamaño_12
+    @tamaño_12.setter
+    def tamaño_12(self, tamaño_12):
+        self._tamaño_12 = tamaño_12
+
+    @property
+    def tamaño_13(self):
+        return self._tamaño_13
+    @tamaño_13.setter
+    def tamaño_13(self, tamaño_13):
+        self._tamaño_13 = tamaño_13
+
+    @property
+    def tamaño_14(self):
+        return self._tamaño_14
+    @tamaño_14.setter
+    def tamaño_14(self, tamaño_14):
+        self._tamaño_14 = tamaño_14
+
+    @property
+    def tamaño_15(self):
+        return self._tamaño_15
+    @tamaño_15.setter
+    def tamaño_15(self, tamaño_15):
+        self._tamaño_15 = tamaño_15
+
 
     @property
     def tamaño_4(self):
