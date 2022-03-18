@@ -30,16 +30,6 @@ def key_callback(window, key, scancode, action, mods):
     if key == glfw.KEY_ESCAPE and action == glfw.PRESS:
          glfw.set_window_should_close(window, 1)
 
-#Cuadrado
-posicion_cuadrado45 = [0.0, 0.0, 0.0]
-posicion_cuadrado44 = [0.0, 0.6, 0.0]
-#0 - izquierda,  1 - derecha
-direccion_cuadrado = 1
-velocidad_cuadrado = 0.20
-
-angulo_triangulo = 0.0
-fase = 90.0
-
 def actualizar():
     global tiempo_anterior
     global window
