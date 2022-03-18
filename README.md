@@ -1,4 +1,4 @@
-# Proyecto Parcial 1
+# Proyecto Parcial 2
 
 ## Equipo:
 
