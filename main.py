@@ -10,11 +10,18 @@ from Meta import *
 from Jugador import *
 from Fondo_Ani import *
 from Obstaculos import *
+from Rombo import *
+
+from Obs_1 import *
+from Obs_2 import *
+from Obs_3 import *
 
 import glfw
 
 #Formato = x, y, z, width, height
 window = None
+
+posicion_respawn = [-0.9, -0.55, 0.0, 0.05, 0.05]
 
 tiempo_anterior = 0.0
 
@@ -23,10 +30,13 @@ estado_anterior_espacio = glfw.RELEASE
 closed = False
 close = glfw.set_window_should_close(window, 1)
 
+rombo = Rombo()
 meta = Meta()
 fondo = Fondo_Ani()
 obstaculo = Obstaculos()
-obsr = []
+obs_1 = Obs_1()
+obs_2 = Obs_2()
+obs_3 = Obs_3()
 jugador = Jugador()
 
 #Cerrar con ESC
@@ -45,13 +55,20 @@ def actualizar():
     tiempo_delta = tiempo_actual - tiempo_anterior
 
     jugador.actualizar(window, tiempo_delta)
-    for obstaculo in obsr:
-        obstaculo.actualizar(tiempo_delta)
-        if obstaculo.colisionando(jugador):
-            obstaculo.herida = True
 
     if jugador.colisionando(meta):
         glfw.set_window_should_close(window, 1)
+
+    if jugador.colisionando(obs_1):
+        jugador.posicion_x = -0.9
+
+    if jugador.colisionando(obs_2):
+        jugador.posicion_x = -0.9
+
+    if jugador.colisionando(obs_3):
+        jugador.posicion_x = -0.9
+
+    rombo.actualizar(tiempo_delta)
 
     tiempo_anterior = tiempo_actual
     
@@ -61,10 +78,13 @@ def colisionando():
     
  
 def draw():
-
     fondo.dibujar()
     meta.dibujar()
+    rombo.dibujar()
     obstaculo.dibujar()
+    obs_1.dibujar()
+    obs_2.dibujar()
+    obs_3.dibujar()
     jugador.dibujar()
 
 #Main

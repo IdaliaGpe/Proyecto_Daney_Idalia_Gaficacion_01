@@ -7,17 +7,15 @@ import math
 
 class Meta(Modelo):
 
-    closed = False
-
     def __init__(self):
 
         super().__init__(0.95,-0.55,0.0,1.0,0.0)
 
         #Colisiones
-        self.extremo_derecho = 0.1
+        self.extremo_derecho = 0.05
         self.extremo_izquierdo = 0.05
-        self.extremo_inferior = 0.09
-        self.extremo_superior = 0.9
+        self.extremo_inferior = 0.05
+        self.extremo_superior = 9.0
 
     def dibujar(self):
 
@@ -36,4 +34,4 @@ class Meta(Modelo):
 
         glPopMatrix()
 
-        self.dibujar_bounding_box()
+        #self.dibujar_bounding_box()

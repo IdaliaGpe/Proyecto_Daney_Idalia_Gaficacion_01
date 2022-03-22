@@ -10,21 +10,9 @@ class Fondo_Ani(Modelo):
 
     def __init__(self):
 
-            super().__init__(direccion = 1.0, rotacion = 0.0, angulo = 0.0, velocidad_angular = 135.0, posicion_z = 0.0)
+            super().__init__()
 
             #Posiciones
-            self.posicion_x = 0.0
-            self.posicion_y = 0.0
-            self.posicion_anterior = 0.0
-
-            self.velocidad_x = 0.6
-            self.velocidad_y = 0.20
-
-            self.extremo_izquierdo = 0.05
-            self.extremo_derecho = 0.05
-            self.extremo_inferior = 0.05
-            self.extremo_superior = 0.05
-
             self.posicion_lineas_x_1 = -0.2
             self.posicion_lineas_y_1 = 0.0
             self.posicion_lineas_x_2 = -0.6
@@ -59,7 +47,6 @@ class Fondo_Ani(Modelo):
             self.posicion_cuadritos_x_2 = 0.3
             self.posicion_cuadritos_y_2 = -0.2
 
-
             self.posicion_1 = 0.14
             self.posicion_2 = 0.29
             self.posicion_3 = -0.90
@@ -86,8 +73,6 @@ class Fondo_Ani(Modelo):
             self.obstaculo_x_2 = 0.2
             self.obstaculo_x_3 = 0.5
             self.obstaculo_x_4 = -0.1
-
-            self.fase = 90.0
 
     ##
     ##
@@ -424,37 +409,6 @@ class Fondo_Ani(Modelo):
         ##
         ##
         ##
-        ##Rombo
-        glPushMatrix()
-        glTranslatef(self.obstaculo_x, self.posicion_11, self.posicion_z)
-        glRotatef(self.rotacion, 0, 0.0, 1.0)
-        glScalef(4.9,4.9,0)
-        glBegin(GL_QUADS)
-        glColor3f(0.0,0.0,1.0)
-
-        glVertex3f(-0.05,0.05,0.0)
-        glVertex3f(0.05,0.05,0.0)
-        glVertex3f(0.05,-0.05,0.0)
-        glVertex3f(-0.05,-0.05,0.0)
-        glEnd()
-        glPopMatrix()
-        ##
-        glPushMatrix()
-        glTranslatef(self.obstaculo_x, self.posicion_11, self.posicion_z)
-        glRotatef(self.rotacion, 0.0,0.0, 1.0)
-        glScalef(1.9,1.9,0)
-        glBegin(GL_QUADS)
-        glColor3f(0.368,0.380,1.0)
-
-        glVertex3f(-0.05,0.05,0.0)
-        glVertex3f(0.05,0.05,0.0)
-        glVertex3f(0.05,-0.05,0.0)
-        glVertex3f(-0.05,-0.05,0.0)
-        glEnd()
-        glPopMatrix()
-        ##
-        ##
-        ##
         ##
         ##TRIANGULOS ADORNOS
         #Triangulos2
@@ -516,70 +470,3 @@ class Fondo_Ani(Modelo):
         glVertex3f(0.05,-0.05,0)
         glEnd()
         glPopMatrix()
-
-    def actualizar(self, tiempo_delta):
-
-        cantidad_movimiento = self.velocidad_y * tiempo_delta
-
-        if self.direccion == 0:
-            self.obstaculo_x_3 = self.obstaculo_x_3 - cantidad_movimiento
-            self.obstaculo_x_3 = self.obstaculo_x_3 + (
-                math.cos((self.angulo + self.fase) * pi / 180.0) * cantidad_movimiento
-            )
-            self.obstaculo_x_3 = self.obstaculo_x_3 + (
-                math.sin((self.angulo + self.fase) * pi / 180.0) * cantidad_movimiento
-            )
-            self.obstaculo_x_3 = self.obstaculo_x_3 + (
-                math.cos((self.angulo + self.fase) * pi / 180.0) * cantidad_movimiento
-            )
-            self.obstaculo_x_3 = self.obstaculo_x_3 + (
-                math.sin((self.angulo + self.fase) * pi / 180.0) * cantidad_movimiento
-            )
-
-        elif self.direccion == 1:
-            self.obstaculo_x_3 = self.obstaculo_x_3 + cantidad_movimiento
-        
-        if self.obstaculo_x_3 <= -0.8 and self.direccion == 0:
-            self.direccion = 1
-        
-        if self.obstaculo_x_3 >= 1 and self.direccion == 1:
-            self.direccion = 0
-            
-            #posicion_cuadrado[0] = -1
-            #posicion_cuadrado[1] = posicion_cuadrado[1] - 0.1
-
-        if self.direccion == 0:
-            self.obstaculo_x_3 = self.obstaculo_x_3 - cantidad_movimiento
-
-        elif self.direccion == 1:
-            self.obstaculo_x_3 = self.obstaculo_x_3 + cantidad_movimiento
-        
-        if self.obstaculo_x_3 <= -0.8 and self.direccion == 0:
-            self.direccion = 1
-        
-        if self.obstaculo_x_3 >= 1 and self.direccion == 1:
-            self.direccion = 0
-            
-            #posicion_cuadrado[0] = -1
-            #posicion_cuadrado[1] = posicion_cuadrado[1] - 0.1
-
-        tiempo_actual = glfw.get_time()
-        #Cuanto tiempo paso entre la ejecucion actual
-        #y la inmediata anterior de esta funcion
-        tiempo_delta = tiempo_actual - tiempo_anterior
-
-        cantidad_movimiento = self.velocidad_x * tiempo_delta
-
-        cantidad_rotacion = self.velocidad_angular * tiempo_delta
-        cantidad_rotacion = -self.velocidad_angular * tiempo_delta
-        self.rotacion = self.rotacion + self.rotacion
-
-        self.rotacion = self.rotacion + cantidad_rotacion
-
-        if self.rotacion  > 360.0:
-            self.rotacion = self.rotacion - 360.0
-        
-        if self.rotacion  > 360.0:
-            self.rotacion = self.rotacion - 360.0
-
-        tiempo_anterior = tiempo_actual

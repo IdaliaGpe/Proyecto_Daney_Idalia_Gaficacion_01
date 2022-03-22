@@ -18,7 +18,6 @@ class Jugador(Modelo):
 
         self.posicion_anterior = 0.0
 
-        self.velocidad_x = 0.6
         self.velocidad_y = 0.7
 
         self.extremo_izquierdo = 0.05
@@ -48,13 +47,13 @@ class Jugador(Modelo):
 
         glPopMatrix()
         
-        self.dibujar_bounding_box()
+        #self.dibujar_bounding_box()
 
     def actualizar(self, window, tiempo_delta):
 
         tiempo_actual = glfw.get_time()
 
-        velocidad_cuadrado = 0.9
+        velocidad_cuadrado = 0.5
 
         cantidad_movimiento = velocidad_cuadrado * tiempo_delta
 
