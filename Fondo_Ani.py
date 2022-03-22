@@ -17,10 +17,6 @@ class Fondo_Ani(Modelo):
             self.posicion_y = 0.0
             self.posicion_anterior = 0.0
 
-            #Meta
-            self.posicion_meta_x = 0.95 
-            self.posicion_meta_y = -0.55
-
             self.velocidad_x = 0.6
             self.velocidad_y = 0.20
 
@@ -81,7 +77,6 @@ class Fondo_Ani(Modelo):
             self.posicion_15 = 0.785
             self.posicion_16 = 0.0
             self.posicion_17 = 0.6
-
 
             self.obstaculo_y = 0.3
             self.obstaculo_y_1 = 0.09

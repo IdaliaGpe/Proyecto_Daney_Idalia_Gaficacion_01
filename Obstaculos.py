@@ -13,8 +13,8 @@ class Obstaculos(Modelo):
 
             #Colisiones
             self.extremo_derecho = 0.05
-            self.extremo_izquierdo = -0.05
-            self.extremo_inferior = -0.05
+            self.extremo_izquierdo = 0.05
+            self.extremo_inferior = 0.05
             self.extremo_superior = 0.15
 
             #Posiciones
@@ -22,10 +22,6 @@ class Obstaculos(Modelo):
             self.posicion_y = -0.55
             self.posicion_y_1 = 0.0
             self.posicion_anterior = 0.0
-
-            #Meta
-            self.posicion_meta_x = 0.95 
-            self.posicion_meta_y = -0.55
 
             self.velocidad_x = 0.6
             self.velocidad_y = 0.7
@@ -56,19 +52,6 @@ class Obstaculos(Modelo):
 
 
         def dibujar(self):
-            #META
-            glPushMatrix()
-            glTranslatef(self.posicion_meta_x, self.posicion_meta_y, self.posicion_z)
-            glBegin(GL_QUADS)
-
-            glColor3f(40/255, 50/255, 100/255)
-            glVertex3f(-self.tamaño_1, self.tamaño_2, self.posicion_z)
-            glVertex3f(self.tamaño_1, self.tamaño_2, self.posicion_z)
-            glVertex3f(0.05,-0.05,0.0)
-            glVertex3f(-0.05,-0.05,0.0)
-            glEnd()
-
-            glPopMatrix()
 
             #Triangulo1
             glPushMatrix()

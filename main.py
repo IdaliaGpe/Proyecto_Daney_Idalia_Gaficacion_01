@@ -15,7 +15,7 @@ import glfw
 
 #Formato = x, y, z, width, height
 window = None
-posicion_respawn = [-0.9, -0.55, 0.0, 0.05, 0.05]
+
 tiempo_anterior = 0.0
 
 estado_anterior_espacio = glfw.RELEASE
@@ -49,14 +49,15 @@ def actualizar():
         obstaculo.actualizar(tiempo_delta)
         if obstaculo.colisionando(jugador):
             obstaculo.herida = True
-        if meta.colisionando(jugador):
-           meta.closed = True
+
+    if jugador.colisionando(meta):
+        glfw.set_window_should_close(window, 1)
 
     tiempo_anterior = tiempo_actual
     
 def colisionando():
-   
     colisionando = False
+    return colisionando   
     
  
 def draw():
