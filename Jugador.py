@@ -6,27 +6,37 @@ import glfw
 
 class Jugador(Modelo):
 
+    JUMP = False
+    IS_JUMPING = False
+    IS_FALLING = False
+    herida = False
+    posicion_y_cuadrado_anterior = 0.0
+
     def __init__(self):
 
         super().__init__()
 
         self.posicion_x = -0.9
         self.posicion_y = -0.55
-        self.posicion_y = 0.0
+        self.posicion_z = 0.0
         self.posicion_anterior = 0.0
 
         self.velocidad_x = 0.6
         self.velocidad_y = 0.7
 
-        self.extremo_izquierdo = 0.05
+        self.extremo_izquierdo = -0.05
         self.extremo_derecho = 0.05
-        self.extremo_inferior = 0.05
+        self.extremo_inferior = -0.05
         self.extremo_superior = 0.05
 
     def dibujar(self):
     
         glPushMatrix()
-        glTranslatef(self.posicion_x, self.posicion_y, self.posicion_z)
+        if not self.herida:
+            glTranslatef(self.posicion_x, self.posicion_y, self.posicion_z)
+        else: 
+            glTranslatef(self.posicion_x, self.posicion_y, self.posicion_z)
+
         glBegin(GL_QUADS)
 
         glColor3f(0.4, 0.9, 0.21)
@@ -40,6 +50,8 @@ class Jugador(Modelo):
         glPopMatrix()
 
     def actualizar(self, window, tiempo_delta):
+
+        tiempo_actual = glfw.get_time()
 
         velocidad_cuadrado = 0.20
 
@@ -60,39 +72,36 @@ class Jugador(Modelo):
         cantidad_de_salto = 0.5
 
         estado_tecla_space = glfw.get_key(window, glfw.KEY_SPACE)
+        #print(str(estado_tecla_space))
 
-        JUMP = False
-        IS_JUMPING = False
-        IS_FALLING = False
+        if self.JUMP is False and self.IS_JUMPING is False and estado_tecla_space == glfw.PRESS:
+            self.JUMP = True
+            self.posicion_y_cuadrado_anterior = self.velocidad_y
 
-        if JUMP is False and IS_JUMPING is False and estado_tecla_space == glfw.PRESS:
-            JUMP = True
-            posicion_y_cuadrado_anterior = self.velocidad_y
-
-        if JUMP is True:
+        if self.JUMP is True:
             # Añade a la y la velocidad_y a la velocidad anteiror
             # Añade la velocidad del salto
             self.velocidad_y += vel_y
-            IS_JUMPING = True
+            self.IS_JUMPING = True
 
         #Ver si ya se paso de burger
-        if IS_JUMPING:
-            if self.velocidad_y - posicion_y_cuadrado_anterior >= cantidad_de_salto:
+        if self.IS_JUMPING:
+            if self.velocidad_y - self.posicion_y_cuadrado_anterior >= cantidad_de_salto:
                 
-                JUMP = False
+                self.JUMP = False
                 vel_y = gravedad * tiempo_delta
                 self.velocidad_y += vel_y
-                IS_FALLING = True
+                self.IS_FALLING = True
 
-        if IS_FALLING: 
+        if self.IS_FALLING: 
             vel_y = gravedad * tiempo_delta
             self.velocidad_y += vel_y
 
-            if self.velocidad_y <= posicion_y_cuadrado_anterior:
-                IS_JUMPING = False
-                JUMP = False
-                IS_FALLING = False
-                self.velocidad_y = posicion_y_cuadrado_anterior
+            if self.velocidad_y <= self.posicion_y_cuadrado_anterior:
+                self.IS_JUMPING = False
+                self.JUMP = False
+                self.IS_FALLING = False
+                self.velocidad_y = self.posicion_y_cuadrado_anterior
 
         # actualizar_cuadrado(tiempo_delta)
-        # tiempo_anterior = tiempo_actual
+        self.tiempo_anterior = tiempo_actual

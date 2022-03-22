@@ -11,6 +11,12 @@ class Obstaculos(Modelo):
 
             super().__init__(posicion_z = 0.0)
 
+            #Colisiones
+            self.extremo_derecho = 0.05
+            self.extremo_izquierdo = -0.05
+            self.extremo_inferior = -0.05
+            self.extremo_superior = 0.15
+
             #Posiciones
             self.posicion_x = -0.9
             self.posicion_y = -0.55
@@ -24,11 +30,6 @@ class Obstaculos(Modelo):
             self.velocidad_x = 0.6
             self.velocidad_y = 0.7
 
-            self.extremo_izquierdo = 0.05
-            self.extremo_derecho = 0.05
-            self.extremo_inferior = 0.05
-            self.extremo_superior = 0.05
-
             self.tamaño_1 = 0.05
             self.tamaño_2 = 9.0
             self.tamaño_3 = -0.90
@@ -40,7 +41,15 @@ class Obstaculos(Modelo):
             self.obstaculo_x_1 = -0.5
             self.obstaculo_x_2 = -0.1
             self.obstaculo_x_3 = -0.0
-            self.obstaculo_x_4 = -0.4
+            self.obstaculo_x_4 = 0.5
+
+            #posicion rectangulo 2
+            self.obstaculo_r2_x = 0.4
+            self.obstaculo_r2_y = -0.55
+
+            #Posiciones plataforma
+            self.posicion_plataforma_x = 0.0
+            self.posicion_plataforma_y = -0.9
 
             self.lista_obstaculos = [self.tamaño_1, self.tamaño_2, self.obstaculo_y, self.obstaculo_y_1, self.obstaculo_x, self.obstaculo_x_1,
             self.obstaculo_x_2, self.obstaculo_x_3, self.obstaculo_x_4]
@@ -92,6 +101,7 @@ class Obstaculos(Modelo):
 
             glEnd()
             glPopMatrix()
+            
             glPushMatrix()
             glTranslatef(self.obstaculo_x_2, self.obstaculo_y, self.posicion_z)
             glBegin(GL_QUADS)
@@ -116,7 +126,7 @@ class Obstaculos(Modelo):
             glEnd()
             glPopMatrix()
             #
-
+            #Cuadrito del rombo
             glPushMatrix()
             glTranslatef(self.obstaculo_x, self.obstaculo_y_1, self.posicion_z)
             glBegin(GL_QUADS)
@@ -148,7 +158,7 @@ class Obstaculos(Modelo):
             #
             #circunferecia 
             glPushMatrix()
-            glTranslatef(self.obstaculo_y_1, self.obstaculo_y_1, self.posicion_z)
+            glTranslatef(self.obstaculo_x, self.obstaculo_y_1, self.posicion_z)
             glBegin(GL_POLYGON)
 
             #A sin(2 pi f t + f)
@@ -158,9 +168,9 @@ class Obstaculos(Modelo):
             glEnd()
             glPopMatrix()
 
-            #Triangulo1
+            #Triangulo3
             glPushMatrix()
-            glTranslatef(+self.obstaculo_x_4, self.obstaculo_y, self.posicion_z)
+            glTranslatef(self.obstaculo_x_4, self.obstaculo_y, self.posicion_z)
             glBegin(GL_TRIANGLES)
 
             #Establecer color
@@ -191,9 +201,9 @@ class Obstaculos(Modelo):
             glPopMatrix()
 
             glPushMatrix()
-            glTranslatef(+self.obstaculo_x_1, self.obstaculo_y, self.posicion_z)
+            glTranslatef(+self.obstaculo_r2_x, self.obstaculo_r2_y, self.posicion_z)
             glBegin(GL_QUADS)
-            glColor3f(0.45,0.1,0.186)
+            glColor3f(0.368,0.0,0.007)
 
             glVertex3f(-0.05,0.15,0.0)
             glVertex3f(0.05,0.15,0.0)
@@ -204,7 +214,7 @@ class Obstaculos(Modelo):
 
             #PLATAFORMA
             glPushMatrix()
-            glTranslatef(self.posicion_y, self.tamaño_3, self.posicion_z)
+            glTranslatef(self.posicion_plataforma_x, self.posicion_plataforma_y, self.posicion_z)
             glBegin(GL_QUADS)
             glColor3f(0.0, 0.0, 0.0)
             glVertex3f(-1.0,0.30,0.0)
@@ -214,5 +224,3 @@ class Obstaculos(Modelo):
             glEnd()
 
             glPopMatrix()
-
-            #return posicion_cuadrado

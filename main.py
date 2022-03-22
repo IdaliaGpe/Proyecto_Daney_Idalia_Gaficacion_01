@@ -1,10 +1,12 @@
 #Importar librerias
+from calendar import c
 from pickle import GLOBAL
 from sre_constants import JUMP
 from turtle import pos
 from OpenGL.GL import *
 from glew_wish import *
 
+from Meta import *
 from Jugador import *
 from Fondo_Ani import *
 from Obstaculos import *
@@ -14,13 +16,16 @@ import glfw
 #Formato = x, y, z, width, height
 window = None
 posicion_respawn = [-0.9, -0.55, 0.0, 0.05, 0.05]
-
 tiempo_anterior = 0.0
 
 estado_anterior_espacio = glfw.RELEASE
 
+closed = False
+close = glfw.set_window_should_close(window, 1)
+
+meta = Meta()
 fondo = Fondo_Ani()
-obs = Obstaculos()
+obstaculo = Obstaculos()
 obsr = []
 jugador = Jugador()
 
@@ -43,13 +48,9 @@ def actualizar():
     for obstaculo in obsr:
         obstaculo.actualizar(tiempo_delta)
         if obstaculo.colisionando(jugador):
-            glfw.set_window_should_close(window, 1)
-
-    # jugador.actualizar(window, tiempo_delta)
-    # for obstaculo in obs:
-    #     obstaculo.actualizar(tiempo_delta)
-    #     if obstaculo.colisionando(jugador):
-    #         jugador.self.posicion_x = get_posicion_incial()
+            obstaculo.herida = True
+        if meta.colisionando(jugador):
+           meta.closed = True
 
     tiempo_anterior = tiempo_actual
     
@@ -61,7 +62,8 @@ def colisionando():
 def draw():
 
     fondo.dibujar()
-    obs.dibujar()
+    meta.dibujar()
+    obstaculo.dibujar()
     jugador.dibujar()
 
 #Main
@@ -129,16 +131,6 @@ def main():
 
     glfw.destroy_window(window)
     glfw.terminate()
-
-# def get_cuadrado():
-#     return posicion_cuadrado
-
-# def set_posicion_inicial():
-#     posicion_cuadrado = get_posicion_incial()
-#     return posicion_cuadrado
-
-    # get_posicion_incial():
-    #     return [-0.9, -0.55, 0.0, 0.05, 0.05] 
 
 if __name__ == "__main__":
     main()
