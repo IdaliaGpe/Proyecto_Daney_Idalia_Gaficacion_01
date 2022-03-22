@@ -11,6 +11,7 @@ from Jugador import *
 from Fondo_Ani import *
 from Obstaculos import *
 from Rombo import *
+from Cuadrado import *
 
 from Obs_1 import *
 from Obs_2 import *
@@ -30,6 +31,7 @@ estado_anterior_espacio = glfw.RELEASE
 closed = False
 close = glfw.set_window_should_close(window, 1)
 
+cua = Cuadrado()
 rombo = Rombo()
 meta = Meta()
 fondo = Fondo_Ani()
@@ -68,6 +70,7 @@ def actualizar():
     if jugador.colisionando(obs_3):
         jugador.posicion_x = -0.9
 
+    cua.actualizar(tiempo_delta)
     rombo.actualizar(tiempo_delta)
 
     tiempo_anterior = tiempo_actual
@@ -76,12 +79,12 @@ def colisionando():
     colisionando = False
     return colisionando   
     
- 
 def draw():
     fondo.dibujar()
     meta.dibujar()
     rombo.dibujar()
     obstaculo.dibujar()
+    cua.dibujar()
     obs_1.dibujar()
     obs_2.dibujar()
     obs_3.dibujar()

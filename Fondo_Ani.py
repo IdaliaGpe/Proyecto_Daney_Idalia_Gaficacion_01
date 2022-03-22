@@ -380,32 +380,6 @@ class Fondo_Ani(Modelo):
         glEnd()
         glPopMatrix()
 
-        glPushMatrix()
-        glTranslatef(self.posicion_cuadritos_x_1, self.posicion_cuadritos_y_1, self.posicion_z)
-        glScalef(0.5,0.5,0)
-        glBegin(GL_QUADS)
-        glColor3f(0.464, 0.393, 0.211)
-        glVertex3f(-0.05,0.05,0.0)
-        glVertex3f(0.05,0.05,0.0)
-        glVertex3f(0.05,-0.05,0.0)
-        glVertex3f(-0.05,-0.05,0.0)
-        glEnd()
-
-        glPopMatrix()
-
-        glPushMatrix()
-        glTranslatef(self.posicion_cuadritos_x_2, +self.posicion_cuadritos_y_2, self.posicion_z)
-        glScalef(0.5,0.5,0)
-        glBegin(GL_QUADS)
-        glColor3f(0.464, 0.393, 0.211)
-        glVertex3f(-0.05,0.05,0.0)
-        glVertex3f(0.05,0.05,0.0)
-        glVertex3f(0.05,-0.05,0.0)
-        glVertex3f(-0.05,-0.05,0.0)
-        glEnd()
-
-        glPopMatrix()
-
         ##
         ##
         ##
